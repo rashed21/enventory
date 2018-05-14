@@ -1,0 +1,172 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+	<link lang="en" th:replace="fragments/generalheader :: gheader"/>
+	<title>Form</title>
+	<link rel="icon" type="image/png" th:href="@{/img/favicon.ico}"/>
+</head>
+  
+<body>
+<!-- Side Navbar -->
+<div lang="en" th:replace="fragments/side_nav :: sidenav"> </div>
+   
+    <div class="page">
+     	<!-- navbar-->
+      <header class="header">
+        <nav class="navbar">
+          <div class="container-fluid">
+            <div class="navbar-holder d-flex align-items-center justify-content-between">
+              <div class="navbar-header">
+              	<a id="toggle-btn" href="#" class="menu-btn">
+              		<i class="icon-bars"> </i>
+           		</a>
+           		<a href="/admin/home" class="navbar-brand">
+                  <div class="brand-text d-none d-md-inline-block">
+                  <span>Company name </span> <!-- <strong class="text-primary">Company name</strong> --> 
+                  </div>
+                </a>
+              </div>
+              <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
+                <li class="nav-item dropdown"> <a id="notifications" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><i class="fa fa-angle-double-down "></i></a>
+                  <ul aria-labelledby="notifications" class="dropdown-menu">
+                    <li><a rel="nofollow" href="#" class="dropdown-item"> 
+                        <div class="notification d-flex justify-content-between">
+                          <div class="notification-content"><i class="fa fa-cog "></i>Setting</div>
+                        </div></a>
+                    </li>
+                    <li><a rel="nofollow" href="#" class="dropdown-item"> 
+                        <div class="notification d-flex justify-content-between">
+                          <div class="notification-content"><i class="fa fa-user-circle  "></i>Profile</div>
+                        </div></a>
+                    </li>
+                  </ul>
+                </li> 
+                <li class="nav-item"><a href="/logout" class="nav-link logout">Logout<i class="fa fa-sign-out"></i></a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </header>
+      
+      <!-- Breadcrumb-->
+      <div class="breadcrumb-holder">
+        <div class="container-fluid">
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item active">Forms       </li>
+          </ul>
+        </div>
+      </div>
+      <section class="forms">     
+      <div class="col-lg-12">
+             <div th:if="${not #lists.isEmpty(wholesellers)}">
+			        <h2>Whole Seller</h2>
+			        <table class="table table-striped">
+			            <tr>
+			                <th>Id</th>
+			                <th>Code</th>
+			                <th>Name</th>
+			                <th>Store Name</th>
+			                <th>Contact</th>
+			                <th>Email</th>
+			                <th>Edit</th>
+			                <th>Delete</th>
+			            </tr>
+			            <tr th:each="wholeseller : ${wholesellers}">
+			                <td th:text="${wholeseller.id}">id</td>
+			                <td th:text="${wholeseller.code}">Code</td>
+			                <td th:text="${wholeseller.firstName+' '+wholeseller.lastName}">Name</td>
+			                <td th:text="${wholeseller.storeName}">Store</td>
+			                <td th:text="${wholeseller.contactOne+'/'+wholeseller.contactTwo}">Contact</td>
+			                <td th:text="${wholeseller.email}">E-mail</td>
+			                <td><a th:href="${ '/admin/wholeseller/edit/' + wholeseller.id}">Edit</a></td>
+			                <td><a th:href="${'/admin/wholeseller/delete/' + wholeseller.id}">Delete</a></td>
+			            </tr>
+			        </table>
+			    </div>
+            </div>
+            <div class="col-lg-12">
+              <div class="card">
+                <div class="card-header d-flex align-items-center">
+                  <h4>Whole Seller Register</h4>
+                </div>
+                <div class="card-body">
+                   <form action="#" th:action="@{/admin/wholeseller/save}" th:object="${wholeseller}" method="post"  >
+                    <input type="hidden"  th:field="*{id}"/>
+                     <div class="row">
+                      <!-- <label class="col-sm-2 form-control-label">Material Inputs</label> -->
+                      <div class="col-sm-6">
+                        <div class="form-group-material">
+                          <input id="code" type="text"  th:field="*{code}" required="required" class="input-material"/>
+                          <label for="register-username" class="label-material">Code</label>
+                        </div>
+                        <div class="form-group-material">
+                          <input id="first_name"  type="text" th:field="*{firstName}" required="required" class="input-material"/>
+                          <label for="register-username" class="label-material">First Name</label>
+                        </div>
+                        <div class="form-group-material">
+                          <input id="lastName" type="text" th:field="*{lastName}"  class="input-material"/>
+                          <label for="lastName" class="label-material">Last Name</label>
+                        </div>
+                        <div class="form-group-material">
+                          <input id="storeName" type="text" th:field="*{storeName}"  class="input-material"/>
+                          <label for="storeName" class="label-material">Store Name</label>
+                        </div>
+                        <div class="form-group-material">
+                          <input id="products" type="text" th:field="*{products}"  class="input-material"/>
+                          <label for="products" class="label-material">Products Available</label>
+                        </div>
+                        <div class="form-group-material">
+                          <input id="description" type="text" th:field="*{description}"  class="input-material"/>
+                          <label for="description" class="label-material">Brif Note</label>
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="form-group-material">
+                          <input id="contactOne" type="text" th:field="*{contactOne}"  class="input-material"/>
+                          <label for="contactOne" class="label-material">Contact One</label>
+                        </div>
+                        <div class="form-group-material">
+                          <input id="contactTwo" type="text" th:field="*{contactTwo}"  class="input-material"/>
+                          <label for="contactTwo" class="label-material">Contact Two</label>
+                        </div>
+                        <div class="form-group-material">
+                          <input id="email" type="text" th:field="*{email}"  class="input-material"/>
+                          <label for="email" class="label-material">E-mail</label>
+                        </div>
+                        <div class="form-group-material">
+                          <input id="postCode" type="text" th:field="*{postCode}"  class="input-material"/>
+                          <label for="postCode" class="label-material">Postal Code</label>
+                        </div>
+                        <div class="form-group-material">
+                          <input id="address" type="text" th:field="*{address}"  class="input-material"/>
+                          <label for="address" class="label-material">Mail Address</label>
+                        </div>
+                         <div class="form-group">
+	                      <input type="submit" value="Submit" class="mr-3 btn btn-primary"/>
+	                    </div>
+                      </div>
+                    </div>
+                   </form>
+                    
+                    
+                  </div>
+               </div>
+              </div>
+      </section>
+      <footer class="main-footer">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-sm-6">
+              <p>Your company &copy; 2017-2019</p>
+            </div>
+            <div class="col-sm-6 text-right">
+              <p>Design by <a href="https://bootstrapious.com" class="external">Bootstrapious</a></p>
+              <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+</body>
+</html>

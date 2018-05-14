@@ -1,0 +1,158 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+	<link lang="en" th:replace="fragments/generalheader :: gheader"/>
+	<title>Form</title>
+	<link rel="icon" type="image/png" th:href="@{/img/favicon.ico}"/>
+</head>
+  
+<body>
+<!-- Side Navbar -->
+<div lang="en" th:replace="fragments/side_nav :: sidenav"> </div>
+   
+    <div class="page">
+     	<!-- navbar-->
+      <header class="header">
+        <nav class="navbar">
+          <div class="container-fluid">
+            <div class="navbar-holder d-flex align-items-center justify-content-between">
+              <div class="navbar-header">
+              	<a id="toggle-btn" href="#" class="menu-btn">
+              		<i class="icon-bars"> </i>
+           		</a>
+           		<a href="/admin/home" class="navbar-brand">
+                  <div class="brand-text d-none d-md-inline-block">
+                  <span>Company name </span> <!-- <strong class="text-primary">Company name</strong> --> 
+                  </div>
+                </a>
+              </div>
+              <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
+                <li class="nav-item dropdown"> <a id="notifications" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><i class="fa fa-angle-double-down "></i></a>
+                  <ul aria-labelledby="notifications" class="dropdown-menu">
+                    <li><a rel="nofollow" href="#" class="dropdown-item"> 
+                        <div class="notification d-flex justify-content-between">
+                          <div class="notification-content"><i class="fa fa-cog "></i>Setting</div>
+                        </div></a>
+                    </li>
+                    <li><a rel="nofollow" href="#" class="dropdown-item"> 
+                        <div class="notification d-flex justify-content-between">
+                          <div class="notification-content"><i class="fa fa-user-circle  "></i>Profile</div>
+                        </div></a>
+                    </li>
+                  </ul>
+                </li> 
+                <li class="nav-item"><a href="/logout" class="nav-link logout">Logout<i class="fa fa-sign-out"></i></a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </header>
+      
+      <!-- Breadcrumb-->
+      <div class="breadcrumb-holder">
+        <div class="container-fluid">
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item active">Forms       </li>
+          </ul>
+        </div>
+      </div>
+      <section class="forms">     
+      <div class="col-lg-12">
+             <div th:if="${not #lists.isEmpty(vouchers)}">
+			        <h2>Voucher List</h2>
+			        <table class="table table-striped">
+			            <tr>
+			                <th>Id</th>
+			                <th>Whole Seller</th>
+			                <th>Voucher</th>
+			                <th>Pairs</th>
+			                <th>Total Value</th>
+			                <th>Payments</th>
+			                <th>Due</th>
+			                <th>Edit</th>
+			                <th>Delete</th>
+			            </tr>
+			            <tr th:each="voucher : ${vouchers}">
+			                <td th:text="${voucher.id}">id</td>
+			                <td th:text="${voucher.wholeseller.storeName}">Voucher</td>
+			                <td th:text="${voucher.voucher}">Voucher</td>
+			                <td th:text="${voucher.totalPair}">Pairs</td>
+			                <td th:text="${voucher.totalValue}">Name</td>
+			                <td th:text="${voucher.payment}">Name</td>
+			                <td th:text="${voucher.due}">Name</td>
+			                <td><a th:href="${ '/admin/voucher/edit/' + voucher.id}">Edit</a></td>
+			                <td><a th:href="${'/admin/voucher/delete/' + voucher.id}">Delete</a></td>
+			            </tr>
+			        </table>
+			    </div>
+            </div>
+            
+             <div class="col-lg-12">
+              <div class="card">
+                <div class="card-header d-flex align-items-center">
+                  <h4>Voucher Entry</h4>
+                </div>
+                <div class="card-body">
+                   <form action="#" th:action="@{/admin/voucher/save}" th:object="${voucher}" method="post"  >
+                     <input type="hidden"  th:field="*{id}"/>
+                     <div class="row">
+                      <!-- <label class="col-sm-2 form-control-label">Material Inputs</label> -->
+                      <div class="col-sm-6">
+                      <div class="form-group-material">
+		       		  	<select th:field="*{wholeseller}" class="mr-3 form-control form-control">
+						  <option th:each="wholeseller : ${wholesellers}" 
+						          th:value="${wholeseller.id}" 
+						          th:text="${wholeseller.storeName+'('+wholeseller.firstName+' '+wholeseller.lastName+')'}"></option>
+						</select>
+					  </div>
+                        <div class="form-group-material">
+                          <input id="voucher" type="text"  th:field="*{voucher}" required="required" class="input-material"/>
+                          <label for="voucher" class="label-material">Voucher No</label>
+                        </div>
+                        <div class="form-group-material">
+                          <input id="totalPair" type="text"  th:field="*{totalPair}" required="required" class="input-material"/>
+                          <label for="totalPair" class="label-material">Total Pair</label>
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                      <div class="form-group-material">
+                          <input id="catagory"  type="text" th:field="*{catagory}" required="required" class="input-material"/>
+                          <label for="catagory" class="label-material">Note on Product</label>
+                        </div>
+                        <div class="form-group-material">
+                          <input id="totalValue" type="text" th:field="*{totalValue}"  class="input-material"/>
+                          <label for="totalValue" class="label-material">Total Value</label>
+                        </div>
+                      <div class="form-group-material">
+                          <input id="payment" type="text" th:field="*{payment}"  class="input-material"/>
+                          <label for="payment" class="label-material">Payment Amount</label>
+                        </div>
+                         <div class="form-group">
+	                      <input type="submit" value="Submit" class="mr-3 btn btn-primary"/>
+	                    </div>
+                      </div>
+                    </div>
+                   </form>
+                    
+                    
+                  </div>
+               </div>
+              </div>
+      </section>
+      <footer class="main-footer">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-sm-6">
+              <p>Your company &copy; 2017-2019</p>
+            </div>
+            <div class="col-sm-6 text-right">
+              <p>Design by <a href="https://bootstrapious.com" class="external">Bootstrapious</a></p>
+              <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+</body>
+</html>

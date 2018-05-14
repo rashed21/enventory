@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:replace="fragments/generalheader :: gheader"/> 
+
+<body>
+<style type="text/css">
+	 .input-outer{
+	 	margin-bottom: 8px;
+	 }
+	 .error-msg{
+	 font-size: 8px;
+	 }
+	 
+</style>
+	<div class="page login-page">
+      <div class="container">
+        <div class="form-outer text-center d-flex align-items-center">
+          <div class="form-inner">
+           <div class="logo text-uppercase"><strong class="text-danger">Brand Name</strong></div>
+            
+            <form autocomplete="off" action="#" th:action="@{/brandType/save}" th:object="${brandType}" method="post" class="form-horizontal" role="form">
+              <div  class="input-outer form-group-material">
+                <input type="text" th:field="*{bTypeName}"  class="input-material"/>
+                <label class="label-material">First Name</label>
+              </div>
+              <div class="input-outer form-group-material">
+                <input  type="text" th:field="*{bTypeCode}" class="input-material"/>
+                <label  class="label-material">Last Name</label>
+              </div>
+              <div class="input-outer form-group-material">
+                <input  type="text" th:field="*{bTypeDesc}" class="input-material"/>
+                <label  class="label-material">Email Address      </label>
+              </div>
+              <input id="register" type="submit" value="SignUp" class="btn btn-primary"/>
+            </form>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+</body>
+</html>
