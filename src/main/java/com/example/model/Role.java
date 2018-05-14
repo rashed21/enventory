@@ -1,5 +1,7 @@
 package com.example.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,9 +9,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "role")
-public class Role {
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public class Role implements Serializable{
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="role_id")

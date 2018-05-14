@@ -80,37 +80,9 @@
 			            <tr>
 			                <th>Code</th>
 			                <th>Name</th>
-			               <!--  <th>Name</th>
-			                <th>Edit</th>
-			                <th>Delete</th> -->
-			            </tr>
-			          <!--   <tr th:each="color : ${colors}">
-			                <td th:text="${color.id}">id</td>
-			                <td th:text="${color.code}">Code</td>
-			                <td th:text="${color.name}">Name</td>
-			                <td><a th:href="${ '/admin/color/edit/' + color.id}">Edit</a></td>
-			                <td><a th:href="${'/admin/color/delete/' + color.id}">Delete</a></td>
-			            </tr> -->
-			        </table>
-<!--              <div th:if="${not #lists.isEmpty(colors)}">
-			        <h2>Product List</h2>
-			        <table   id="getAllcolor" class="table table-striped">
-			            <tr>
-			                <th>Code</th>
-			                <th>Name</th>
-			                <th>Name</th>
 			                <th>Edit</th>
 			                <th>Delete</th>
-			            </tr>
-			            <tr th:each="color : ${colors}">
-			                <td th:text="${color.id}">id</td>
-			                <td th:text="${color.code}">Code</td>
-			                <td th:text="${color.name}">Name</td>
-			                <td><a th:href="${ '/admin/color/edit/' + color.id}">Edit</a></td>
-			                <td><a th:href="${'/admin/color/delete/' + color.id}">Delete</a></td>
-			            </tr>
 			        </table>
-			    </div> -->
             </div>
       </section>
       <footer class="main-footer">
@@ -128,6 +100,6 @@
       </footer>
     </div>
 
-<script type="text/javascript" th:src="@{/js/main.js}"></script>
+<script type="text/javascript" th:src="@{/js/color.js}"></script>
 </body>
 </html>

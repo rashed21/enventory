@@ -1,5 +1,6 @@
 package com.example.model;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -18,9 +19,12 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "user")
-public class User {
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public class User implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

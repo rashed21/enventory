@@ -50,11 +50,10 @@ public class ColorController implements Serializable{
 	@GetMapping(value="/color/all")
 	@ResponseBody
 	public Response  allColors(){
-		
-		Color color=new Color(null, "123", "Sample", null);
-		Response response = new Response("Done", color);
+		Response response = new Response("Done", colorRepository.findAll());
 		return response;
 	}
+	
 	
 	@PostMapping(value = "/color/save")
 	@ResponseBody
@@ -67,17 +66,10 @@ public class ColorController implements Serializable{
 			color.setUser(user);
 			color.setEntryDate(new Date());
 			colorRepository.save(color);
-//			color =null;
 			Response response = new Response("Done", color);
 		return response;
 	}
 	
-	
-/*	@PostMapping(value = "/color/save")
-	public ModelAndView postCustomer(@RequestBody Color color) {
-		
-		return null;
-	}*/
 	
 	@RequestMapping(value = "/color/edit/{id}", method = RequestMethod.GET)
 	public ModelAndView editColor(@PathVariable Integer id) {

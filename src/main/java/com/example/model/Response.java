@@ -1,6 +1,8 @@
 package com.example.model;
 
-public class Response {
+import java.io.Serializable;
+
+public class Response implements Serializable{
 	private String status;
 	private Object data;
 	
